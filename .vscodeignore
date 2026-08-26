@@ -9,3 +9,6 @@
 **/*.vsix
 **/.DS_Store
 package-lock.json
+dist/
+scripts/
+extension/resources/icon.svg

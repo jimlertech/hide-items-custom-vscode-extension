@@ -1,5 +1,11 @@
 # Change Log
 
+## v1.0.7
+
+- Replace the Marketplace icon with a quieter, thin-stroke eye-off mark.
+- Write versioned VSIX distributions to `dist` through the repository-local VSCE package.
+- Exclude build scripts and generated distributions from packaged extension files.
+
 ## v1.0.6
 
 - Replace the marketplace version and installs badges. shields.io retired its

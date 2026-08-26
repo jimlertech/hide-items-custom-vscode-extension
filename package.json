@@ -1,7 +1,7 @@
 {
     "name": "hide-items-custom",
     "displayName": "Hide Items Custom",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "Hide Items Custom lets you easily Hide Files & Folders with Dynamic Filter Options.  Add a New 'Hidden Items' Explorer Pane for you to Manage and Quickly Toggle Visibility of Hidden Items.",
     "license": "MIT",
     "publisher": "lerxst",
@@ -197,7 +197,7 @@
         "test": "npm run -s test:lint && npm run -s test:unit",
         "test:unit": "echo 'No Unit Tests'",
         "test:lint": "eslint --ext .js ./extension --fix",
-        "package": "vsce package",
+        "package": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\Package-Extension.ps1",
         "publish": "vsce publish"
     },
     "dependencies": {
