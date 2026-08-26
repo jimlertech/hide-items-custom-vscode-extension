@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hide Items Custom icon options</title>
+    <script>
+      const savedTheme = localStorage.getItem("icon-preview-theme");
+      if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+    </script>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0b0e16;
+        --surface: #141a28;
+        --surface-2: #1d2538;
+        --text: #e7ecf5;
+        --muted: #9aa6bd;
+        --border: #28324a;
+        --accent: #6366f1;
+        --accent-2: #8b5cf6;
+        --radius: 0;
+      }
+
+      :root[data-theme="light"] {
+        color-scheme: light;
+        --bg: #f5f7fb;
+        --surface: #ffffff;
+        --surface-2: #e5e9f2;
+        --text: #1a2233;
+        --muted: #5b6678;
+        --border: #cdd5e4;
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root:not([data-theme="dark"]) {
+          color-scheme: light;
+          --bg: #f5f7fb;
+          --surface: #ffffff;
+          --surface-2: #e5e9f2;
+          --text: #1a2233;
+          --muted: #5b6678;
+          --border: #cdd5e4;
+        }
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        background:
+          linear-gradient(rgba(99, 102, 241, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(99, 102, 241, 0.06) 1px, transparent 1px),
+          var(--bg);
+        background-size: 32px 32px;
+        color: var(--text);
+        font-family: Bahnschrift, "Segoe UI", sans-serif;
+        letter-spacing: 0;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 22px 32px;
+        background: color-mix(in srgb, var(--surface) 84%, transparent);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(14px);
+      }
+
+      h1, h2, p { margin: 0; }
+      h1 { font-size: 24px; font-weight: 650; }
+      header p { margin-top: 5px; color: var(--muted); font-size: 14px; }
+
+      button {
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+        color: var(--text);
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        cursor: pointer;
+      }
+
+      button svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.75; }
+
+      main {
+        width: min(1240px, calc(100% - 48px));
+        margin: 32px auto 56px;
+      }
+
+      .legend {
+        display: flex;
+        gap: 18px;
+        margin-bottom: 18px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .option {
+        display: grid;
+        grid-template-columns: 240px 220px 1fr;
+        gap: 28px;
+        align-items: center;
+        padding: 24px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+      }
+
+      .option + .option { margin-top: 16px; }
+      .option.recommended { border-left: 4px solid var(--accent); }
+      .option h2 { font-size: 18px; font-weight: 650; }
+      .option p { margin-top: 8px; color: var(--muted); font-size: 14px; line-height: 1.45; }
+      .tag { color: #a5b4fc; font-size: 12px; font-weight: 650; text-transform: uppercase; }
+
+      .large-icon, .current-icon {
+        width: 192px;
+        height: 192px;
+        display: block;
+      }
+
+      .scale-row {
+        min-height: 192px;
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        padding: 20px;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+      }
+
+      .sample { display: grid; justify-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
+      .size-64 { width: 64px; height: 64px; }
+      .size-32 { width: 32px; height: 32px; }
+
+      .icon-art { display: block; overflow: visible; }
+
+      @media (max-width: 900px) {
+        .option { grid-template-columns: 1fr; }
+        .scale-row { min-height: auto; }
+        header { padding: 18px 20px; }
+        main { width: min(100% - 32px, 640px); }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Hide Items Custom icon study</h1>
+        <p>
+          Neutral utility icons, tested at Marketplace and activity-bar sizes.
+        </p>
+      </div>
+      <button
+        id="theme-toggle"
+        type="button"
+        title="Toggle theme"
+        aria-label="Toggle theme"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path
+            d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"
+          ></path>
+        </svg>
+      </button>
+    </header>
+
+    <main>
+      <div class="legend">
+        <span>192 px</span><span>64 px</span><span>32 px</span>
+      </div>
+
+      <section class="option">
+        <div>
+          <span class="tag">Current</span>
+          <h2>Eye-off badge</h2>
+          <p>
+            Recognizable, but the circle wastes space and the heavy black slash
+            overwhelms the mark.
+          </p>
+        </div>
+        <img
+          class="current-icon"
+          src="../extension/resources/icon.png"
+          alt="Current Hide Items Custom icon"
+        />
+        <div class="scale-row">
+          <div class="sample">
+            <img
+              class="size-64"
+              src="../extension/resources/icon.png"
+              alt="Current icon at 64 pixels"
+            /><span>64</span>
+          </div>
+          <div class="sample">
+            <img
+              class="size-32"
+              src="../extension/resources/icon.png"
+              alt="Current icon at 32 pixels"
+            /><span>32</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="option recommended">
+        <div>
+          <span class="tag">Recommended · A</span>
+          <h2>Eye-off on ink</h2>
+          <p>
+            The preferred mark on a nearly black canvas. High contrast without
+            the softer gray appearance of the previous version.
+          </p>
+        </div>
+        <svg
+          class="large-icon icon-art"
+          viewBox="0 0 512 512"
+          role="img"
+          aria-label="White eye-off icon on a nearly black background"
+        >
+          <rect width="512" height="512" fill="#17191c" />
+          <path
+            d="M83 256c42-66 100-99 173-99s131 33 173 99c-42 66-100 99-173 99S125 322 83 256z"
+            fill="none"
+            stroke="#f7f7f5"
+            stroke-width="17"
+            stroke-linejoin="round"
+          />
+          <circle cx="256" cy="256" r="48" fill="none" stroke="#f7f7f5" stroke-width="17" />
+          <path d="M112 112l288 288" fill="none" stroke="#17191c" stroke-width="45" />
+          <path d="M112 112l288 288" fill="none" stroke="#f7f7f5" stroke-width="17" />
+        </svg>
+        <div class="scale-row" data-icon="a"></div>
+      </section>
+
+      <section class="option">
+        <div>
+          <span class="tag">Option B</span>
+          <h2>Eye-off on paper</h2>
+          <p>
+            The same mark reversed onto a warm off-white canvas. Less severe,
+            while remaining plain and mostly colorless.
+          </p>
+        </div>
+        <svg
+          class="large-icon icon-art"
+          viewBox="0 0 512 512"
+          role="img"
+          aria-label="Dark eye-off icon on an off-white background"
+        >
+          <rect width="512" height="512" fill="#f2f1ed" />
+          <path
+            d="M83 256c42-66 100-99 173-99s131 33 173 99c-42 66-100 99-173 99S125 322 83 256z"
+            fill="none"
+            stroke="#242629"
+            stroke-width="28"
+            stroke-linejoin="round"
+          />
+          <circle cx="256" cy="256" r="48" fill="none" stroke="#242629" stroke-width="28" />
+          <path d="M112 112l288 288" fill="none" stroke="#f2f1ed" stroke-width="62" />
+          <path d="M112 112l288 288" fill="none" stroke="#242629" stroke-width="28" />
+        </svg>
+        <div class="scale-row" data-icon="b"></div>
+      </section>
+
+      <section class="option">
+        <div>
+          <span class="tag">Option C</span>
+          <h2>Plain eye-off</h2>
+          <p>
+            Keeps the familiar visibility metaphor, stripped down to a gray
+            square and a single white line icon.
+          </p>
+        </div>
+        <svg
+          class="large-icon icon-art"
+          viewBox="0 0 512 512"
+          role="img"
+          aria-label="Neutral eye-off icon"
+        >
+          <rect width="512" height="512" fill="#555a61" />
+          <path
+            d="M83 256c42-66 100-99 173-99s131 33 173 99c-42 66-100 99-173 99S125 322 83 256z"
+            fill="none"
+            stroke="#f4f5f6"
+              <h2>Eye-off, transparent</h2>
+            stroke-linejoin="round"
+                No background at all. The dark mark stands on its own, though its
+                appearance will depend on where the Marketplace places it.
+            cx="256"
+            cy="256"
+            r="48"
+            fill="none"
+            stroke="#f4f5f6"
+            stroke-width="28"
+              aria-label="Dark eye-off icon on a transparent background"
+          <path
+            fill="none"
+            stroke="#555a61"
+            stroke-width="62"
+                stroke="#242629"
+          <path
+            d="M112 112l288 288"
+            fill="none"
+              <circle cx="256" cy="256" r="48" fill="none" stroke="#242629" stroke-width="28" />
+            stroke-width="28"
+          />
+        </svg>
+                stroke="#ffffff"
+      </section>
+    </main>
+              <path d="M112 112l288 288" fill="none" stroke="#242629" stroke-width="28" />
+    <script>
+      const sourceIcons = [...document.querySelectorAll(".option .large-icon.icon-art")];
+      sourceIcons.forEach((source, index) => {
+        const target = document.querySelector(`[data-icon="${String.fromCharCode(97 + index)}"]`);
+        [64, 32].forEach((size) => {
+          const sample = document.createElement("div");
+          sample.className = "sample";
+          const clone = source.cloneNode(true);
+          clone.removeAttribute("class");
+          clone.style.width = `${size}px`;
+          clone.style.height = `${size}px`;
+          sample.append(clone, Object.assign(document.createElement("span"), { textContent: String(size) }));
+          target.append(sample);
+        });
+      });
+
+      document.getElementById("theme-toggle").addEventListener("click", () => {
+        const current = document.documentElement.dataset.theme;
+        const next = current === "light" ? "dark" : "light";
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem("icon-preview-theme", next);
+      });
+    </script>
+  </body>
+</html>
