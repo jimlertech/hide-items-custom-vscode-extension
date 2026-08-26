@@ -30,6 +30,24 @@ Or from the command line:
 code --install-extension lerxst.hide-items-custom
 ```
 
+### Install a local VSIX
+
+Build and install the current package from the repository:
+
+```powershell
+.\scripts\Build-Extension.ps1
+.\scripts\Install-Extension.ps1
+```
+
+After installation, run **Developer: Reload Window** so VS Code refreshes the
+extension metadata and icon. If the previous icon remains, close every VS Code
+window and reopen VS Code.
+
+A local VSIX installation may show the technical publisher ID **Lerxst**. A
+Marketplace installation resolves the same publisher account to **Jim Brown**.
+Both labels refer to publisher ID `lerxst`; changing that ID would create a
+different extension identity.
+
 ## Usage
 
 ### Hiding an item
