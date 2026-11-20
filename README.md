@@ -143,10 +143,10 @@ More detail, including Windows glob-separator issues, is in [TROUBLESHOOTING.md]
 
 ## Contributing
 
-Issues and pull requests are welcome at [purduepete/hide-items-custom-vscode-extension](https://github.com/purduepete/hide-items-custom-vscode-extension).
+Issues and pull requests are welcome at [jimlertech/hide-items-custom-vscode-extension](https://github.com/jimlertech/hide-items-custom-vscode-extension).
 
 ```sh
-git clone https://github.com/purduepete/hide-items-custom-vscode-extension.git
+git clone https://github.com/jimlertech/hide-items-custom-vscode-extension.git
 cd hide-items-custom-vscode-extension
 npm install
 npm test          # lint

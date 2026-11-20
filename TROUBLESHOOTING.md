@@ -75,4 +75,4 @@ Please include:
 - The contents of `files.exclude`
 - The exact path you tried to hide
 
-Issues: https://github.com/purduepete/hide-items-custom-vscode-extension/issues
+Issues: https://github.com/jimlertech/hide-items-custom-vscode-extension/issues
