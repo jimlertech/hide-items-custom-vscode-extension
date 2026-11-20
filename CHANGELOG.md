@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.0.8
+
+- Move the repository to the jimlertech GitHub organization and update the repository, issues and homepage links.
+
 ## v1.0.7
 
 - Replace the Marketplace icon with a quieter, thin-stroke eye-off mark.
